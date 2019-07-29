@@ -3,17 +3,19 @@ import tkinter as tk
 
 # handle buttons pressin'
 def press(button):
-    if (button == 'Exit'):
-        app.stop()
-    else:
-        user_key = app.getEntry("User key")
-        download_path = app.getEntry("Images path")
-        print("key:", user_key, "download path:", download_path)
+	if button == 'Exit':
+		app.stop()
+	elif button == 'Accept':
+		user_key = app.getEntry("User key")
+		download_path = app.getEntry("Images path")
+		print("key:", user_key, "download path:", download_path)
+	else:
+		pass
 
 
 # basic configuration of app
 app = gui('Bulk from pexels', '640x480')
-app.configure(bg='black', fg='white', font={'size':14, 'family': 'Helvica'}, resizable='True')
+app.configure(bg='lightgray', fg='black', font={'size':14, 'family': 'Helvica'}, resizable='True')
 app.buttonFont = 10
 app.setTransparency(100)
 app.setLocation('CENTER')
