@@ -1,0 +1,1 @@
+This app is currently in develpment, nothing is available yet to be downloaded and used; if you want to work on this app there's available the appJar module aswell as Pexels module from it's website. Both of them are well documented so give it a try! :)
