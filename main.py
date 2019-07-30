@@ -10,17 +10,10 @@ from appJar import gui
 
 ############### FX ###############
 
-
-# handle buttons pressin'
-def press(button):
-	if button == 'Exit':
-		app.stop()
-	elif button == 'Accept':
-		user_key = app.getEntry("User key")
-		download_path = app.getEntry("Images path")
-		print("key:", user_key, "download path:", download_path)
-	else:
-		pass
+def accept():
+	user_key = app.getEntry("User key")
+	download_path = app.getEntry("Images path")
+	print("key:", user_key, "download path:", download_path)
 
 ############### Config ###############
 
@@ -32,10 +25,10 @@ app.setLocation('CENTER')
 
 ############### Main ###############
 
-app.addLabel('title', 'Download all the images from PEXELS! :)')
-app.addLabelEntry('User key')
-app.addLabelEntry('Images path')
-app.addButtons(["Accept", "Exit"], press)
-
+app.addLabel('title', 'Download all the images from PEXELS!',colspan=2)
+app.addLabelEntry('User key',colspan=2)
+app.addLabelEntry('Images path',colspan=2)
+app.addButton("Accept", accept,row=3,column=0)
+app.addButton("Exit",app.stop,row=3,column=1)
 
 app.go()
