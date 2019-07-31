@@ -1,8 +1,8 @@
-"""
-								dPexel  0.5
-A simple app with a UI that allows users to download bulk images from Pexel (image wesbsite)
+#"""
+								#dPexel  0.5
+#A simple app with a UI that allows users to download bulk images from #Pexel (image wesbsite)
 
-"""
+#"""
 
 ############### Imports ###############
 
