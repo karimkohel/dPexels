@@ -14,35 +14,31 @@ import constant
 
 ############### FX ###############
 
+def accept():
+	# function that executes the searching, gets variables from inputs
+	execute_search(app.getEntry('User key:'), app.getEntry('Searching word:'), constant.search_pages)
 
-# handle buttons pressin'
-def press(button):
-	if button == 'Exit':
-		app.stop()
-	elif button == 'Accept':
-		# function that executes the searching, gets variables from inputs
-		execute_search(app.getEntry('User key:'), app.getEntry('Searching word:'), constant.search_pages)
-	elif button == 'Download images':
-		print(search_urls)		
-		download_images(search_urls, app.getEntry('Path'))
-	else:
-		pass
+def download():
+	# function that executes the searching, gets variables from inputs
+	execute_search(app.getEntry('User key:'), app.getEntry('Searching word:'), constant.search_pages)
 
 ############### Define GUI components ##################
 
 app = gui('dPexels', '640x480')
 
-app.setPadding([0, 0])
+app.setPadding([20, 0])
 app.setInPadding([0, 0])
 
 app.setStretch('sides')
-app.addLabel('title', 'Download all the images from PEXELS! :)')
-app.addLabelEntry('User key:', 1, 0, 2)
-app.addLabel('description', 'You can find your key in this link', 4, 0)
-app.addLabel('description_link', 'https://www.pexels.com/api/new/', 5, 0)
-app.addLabelEntry('Searching word:', 6, 0, 2)
-app.addLabelEntry('Path', 7, 0, 2)
-app.addButtons(["Accept", "Download images", "Exit"], press, 20, 0)
+app.addLabel('title', 'Download all the images from PEXELS! :)',colspan=3)
+app.addLabelEntry('User key:',colspan=3)
+app.addLabel('description', 'You can find your key in this link',colspan=3)
+app.addLabel('description_link', 'https://www.pexels.com/api/new/',colspan=3)
+app.addLabelEntry('Searching word:',colspan=3)
+app.addLabelEntry('Path',colspan=3)
+app.addButton('Accept', accept,6,0)
+app.addButton('Download',download,6,1)
+app.addButton('Exit',app.stop,6,2)
 
 
 
