@@ -4,6 +4,7 @@
 
 from pypexels import PyPexels
 import requests
+import os
 
 ##############################################
 
@@ -25,12 +26,19 @@ def execute_search(key, string, pages):
         search_results = search_results.get_next_page()
 
 #function that downloads images on a certain path
-def download_images(urls, path):
-    for url in urls:
-        segment = (len(url.split('/')) - 1)
-        img_name = path + url.split('/')[segment].split('?')[0]
-        img = requests.get(url).content
-        with open(img_name, 'wb') as image:
-            image.write(img)
+def download_images(urls, path, download_amount):
+    if not os.path.exists(path):
+        os.makedirs(path)
+    if (len(urls) != 0):
+        for url_ in download_amount:
+            url = urls[url_]
+            print(url)
+            segment = (len(url.split('/')) - 1)
+            img_name = path + url.split('/')[segment].split('?')[0]
+            img = requests.get(url).content
+            with open(img_name, 'wb') as image:
+                image.write(img)
+    else:
+        print('No urls available')
 
 ###############################################

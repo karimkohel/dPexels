@@ -11,17 +11,61 @@ from apiRequests import execute_search
 from apiRequests import search_urls
 from apiRequests import download_images
 import constant
+from tempfile import TemporaryFile
+import os
 
 ############### FX ###############
 
 def accept():
 	# function that executes the searching, gets variables from inputs
 	execute_search(app.getEntry('User key:'), app.getEntry('Searching word:'), constant.search_pages)
+	max_photos = len(search_urls)
+	app.setScaleRange("Number of photos", minimum_photos, max_photos, curr=10)
 
 def download():
-	# function that executes the searching, gets variables from inputs
+	# function that downloads desired amount of images from the requested array of urls
 	num_of_photos = app.getScale("Number of photos")
-	execute_search(app.getEntry('User key:'), app.getEntry('Searching word:'), constant.search_pages)
+	download_images(search_urls, app.getEntry('Path'), num_of_photos)
+
+def quit_app():
+	# function that executes when the exit button is pressed
+	write_cached_data()
+	app.stop()
+
+def write_cached_data():
+	# function to write temporal data from current usage of the app
+	data = open('temp.txt', 'w') 
+	if (app.getEntry('User key:') != ''):
+		data.writelines(app.getEntry('User key:') + '\n')
+	else:
+		data.writelines('key\n') 		
+	if (app.getEntry('Path') != ''):
+		data.writelines(app.getEntry('Path') + '\n')
+	else:
+		data.writelines('path\n')
+	data.close()
+	
+def read_cached_data():
+	# function to read temporal data from previous usages of the app 
+	print('reading old data')
+	if (os.path.exists('./temp.txt')):
+		data = open('temp.txt', 'r') 
+		data_ = data.readlines()
+		print(data_)
+		if (data_[0] != 'key\n'):
+			user_key = data_[0].split('\n')[0]
+			app.setEntry('User key:', user_key)
+			print(user_key)
+		if (data_[1] != 'path\n'):	
+			path = data_[1].split('\n')[0]
+			app.setEntry('Path', path)
+			print(path)
+	else:
+		file = open('temp.txt', 'w')
+		file.write('key\n')
+		file.write('path\n')
+	
+
 
 ############### Define GUI components ##################
 
@@ -40,7 +84,7 @@ app.addLabelEntry('Path',colspan=3)
 app.addLabelScale("Number of photos",colspan=3)
 app.addButton('Accept', accept,7,0)
 app.addButton('Download',download,7,1)
-app.addButton('Exit',app.stop,7,2)
+app.addButton('Exit',quit_app,7,2)
 
 
 
@@ -48,16 +92,25 @@ app.addButton('Exit',app.stop,7,2)
 ############### Config ################################
 
 minimum_photos = 0
-max_photos = 100
+max_photos = 0
 
 app.configure(bg='lightgray', fg='black', font={'size':14, 'family': 'Helvica'}, resizable='True')
 app.buttonFont = 10
-app.setTransparency(100)  #Transparency isnt working apprently
+app.setTransparency(100) # 100 means that it is not transparent
 app.setLocation('CENTER')
 app.setLabelFg('description_link', 'blue')
-app.setScaleRange("Number of photos", minimum_photos, max_photos, curr=10)
+app.setScaleRange("Number of photos", minimum_photos, max_photos, curr=0)
 app.showScaleValue("Number of photos", show=True)
+
+################ read if exists previous defined variables
+
+
+read_cached_data()
+
 
 ############## Run app #################################
 
 app.go()
+
+
+
