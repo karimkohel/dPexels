@@ -92,7 +92,7 @@ app.addButton('Exit',quit_app,7,2)
 ############### Config ################################
 
 minimum_photos = 0
-max_photos = 100
+max_photos = 0
 
 app.configure(bg='lightgray', fg='black', font={'size':14, 'family': 'Helvica'}, resizable='True')
 app.buttonFont = 10
