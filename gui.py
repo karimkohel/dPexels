@@ -16,11 +16,12 @@ import os
 
 ############### FX ###############
 
-def accept():
+def set_():
 	# function that executes the searching, gets variables from inputs
 	execute_search(app.getEntry('User key:'), app.getEntry('Searching word:'), constant.search_pages)
 	max_photos = len(search_urls)
 	app.setScaleRange("Number of photos", minimum_photos, max_photos, curr=10)
+	write_cached_data()
 
 def download():
 	# function that downloads desired amount of images from the requested array of urls
@@ -29,7 +30,6 @@ def download():
 
 def quit_app():
 	# function that executes when the exit button is pressed
-	write_cached_data()
 	app.stop()
 
 def write_cached_data():
@@ -82,7 +82,7 @@ app.addLabel('description_link', 'https://www.pexels.com/api/new/',colspan=3)
 app.addLabelEntry('Searching word:',colspan=3)
 app.addLabelEntry('Path',colspan=3)
 app.addLabelScale("Number of photos",colspan=3)
-app.addButton('Accept', accept,7,0)
+app.addButton('Set', set_,7,0)
 app.addButton('Download',download,7,1)
 app.addButton('Exit',quit_app,7,2)
 
