@@ -26,7 +26,13 @@ def execute_search(key, string, pages):
         search_results = search_results.get_next_page()
 
 #function that downloads images on a certain path
-def download_images(urls, path, download_amount):
+def download_images(urls, path_, download_amount):
+    path = path_
+    if (len(path.split('./')) == 1):
+        path = './' + path
+    if (path[len(path)-1] != '/'):
+        path = path + '/'
+    print(path)
     if not os.path.exists(path):
         os.makedirs(path)
     for url in urls:
