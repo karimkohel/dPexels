@@ -101,8 +101,11 @@ app.setLocation('CENTER')
 app.setScaleRange("Number of photos", minimum_photos, max_photos, curr=0)
 app.showScaleValue("Number of photos", show=True)
 
-################ read if exists previous defined variables
+app.setEntryTooltip('User key:', 'You need to make an account on the pexels website and copy your own key')
+app.setEntryTooltip('Searching word:', 'A descriptive key word for the images that you are looking for')
+app.setLabelTooltip('Number of photos', 'Select the amount of photos that you want to download')
 
+################ read if exists previous defined variables
 
 read_cached_data()
 
