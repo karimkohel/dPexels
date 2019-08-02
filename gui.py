@@ -71,14 +71,14 @@ def read_cached_data():
 
 app = gui('dPexels', '640x480')
 
-app.setPadding([20, 0])
+app.setPadding([10, 0])
 app.setInPadding([0, 0])
 
 app.setStretch('sides')
 app.addLabel('title', 'Download all the images from PEXELS! :)',colspan=3)
 app.addLabelEntry('User key:',colspan=3)
 app.addLabel('description', 'You can find your key in this link',colspan=3)
-app.addLabel('description_link', 'https://www.pexels.com/api/new/',colspan=3)
+app.addWebLink('https://www.pexels.com/api/new/', 'https://www.pexels.com/api/new/',colspan=3)
 app.addLabelEntry('Searching word:',colspan=3)
 app.addLabelEntry('Path',colspan=3)
 app.addLabelScale("Number of photos",colspan=3)
@@ -98,12 +98,14 @@ app.configure(bg='lightgray', fg='black', font={'size':14, 'family': 'Helvica'},
 app.buttonFont = 10
 app.setTransparency(100) # 100 means that it is not transparent
 app.setLocation('CENTER')
-app.setLabelFg('description_link', 'blue')
 app.setScaleRange("Number of photos", minimum_photos, max_photos, curr=0)
 app.showScaleValue("Number of photos", show=True)
 
-################ read if exists previous defined variables
+app.setEntryTooltip('User key:', 'You need to make an account on the pexels website and copy your own key')
+app.setEntryTooltip('Searching word:', 'A descriptive key word for the images that you are looking for')
+app.setLabelTooltip('Number of photos', 'Select the amount of photos that you want to download')
 
+################ read if exists previous defined variables
 
 read_cached_data()
 
