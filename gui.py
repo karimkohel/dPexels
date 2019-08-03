@@ -20,12 +20,12 @@ def set_():
 	# function that executes the searching, gets variables from inputs
 	execute_search(app.getEntry('User key:'), app.getEntry('Searching word:'), constant.search_pages)
 	max_photos = len(search_urls)
-	app.setScaleRange("Number of photos", minimum_photos, max_photos, curr=10)
+	app.setScaleRange("Number of photos: ", minimum_photos, max_photos, curr=max_photos)
 	write_cached_data()
 
 def download():
 	# function that downloads desired amount of images from the requested array of urls
-	num_of_photos = app.getScale("Number of photos")
+	num_of_photos = app.getScale("Number of photos: ")
 	download_images(search_urls, app.getEntry('Path'), num_of_photos)
 
 def quit_app():
@@ -75,16 +75,19 @@ app.setPadding([10, 0])
 app.setInPadding([0, 0])
 
 app.setStretch('sides')
-app.addLabel('title', 'Download all the images from PEXELS! :)',colspan=3)
-app.addLabelEntry('User key:',colspan=3)
-app.addLabel('description', 'You can find your key in this link',colspan=3)
-app.addWebLink('https://www.pexels.com/api/new/', 'https://www.pexels.com/api/new/',colspan=3)
-app.addLabelEntry('Searching word:',colspan=3)
-app.addLabelEntry('Path',colspan=3)
-app.addLabelScale("Number of photos",colspan=3)
-app.addButton('Set', set_,7,0)
-app.addButton('Download',download,7,1)
-app.addButton('Exit',quit_app,7,2)
+app.addLabel('title', 'Download all the images from PEXELS! :)', 0, 0, colspan=3).config(font="Roman 20")
+app.addHorizontalSeparator(1, 0, 3, colour="red")
+app.addLabelEntry('User key:', 2, 0, colspan=3)
+app.addLabel('description', 'You can find your key in this link:', 3, 0, colspan=1).config(font="Helvetica 11")
+app.addWebLink('https://www.pexels.com/api/new/', 'https://www.pexels.com/api/new/', 3, 1, colspan=2)
+app.addLabelEntry('Searching word:', 5, 0, colspan=3)
+app.addOptionBox('img_format', ['original', 'large', 'medium', 'small', 'portrait', 'landscape', 'tiny'], 6, 1, colspan=2)
+app.addLabel('Image format: ', 'Image format: ', 6, 0, colspan=1)
+app.addLabelEntry('Path', 7, 0,colspan=3)
+app.addLabelScale("Number of photos: ", 8, 0,colspan=3)
+app.addButton('Set', set_, 9, 0, colspan=1)
+app.addButton('Download',download, 9, 1, colspan=1)
+app.addButton('Exit',quit_app, 9, 2, colspan=1)
 
 
 
@@ -94,16 +97,17 @@ app.addButton('Exit',quit_app,7,2)
 minimum_photos = 0
 max_photos = 0
 
-app.configure(bg='lightgray', fg='black', font={'size':14, 'family': 'Helvica'}, resizable='True')
+app.configure(bg='lightgray', fg='black', font={'size':12, 'family': 'Helvica'}, resizable='True')
 app.buttonFont = 10
 app.setTransparency(100) # 100 means that it is not transparent
 app.setLocation('CENTER')
-app.setScaleRange("Number of photos", minimum_photos, max_photos, curr=0)
-app.showScaleValue("Number of photos", show=True)
+app.setScaleRange("Number of photos: ", minimum_photos, max_photos, curr=0)
+app.showScaleValue("Number of photos: ", show=True)
 
 app.setEntryTooltip('User key:', 'You need to make an account on the pexels website and copy your own key')
 app.setEntryTooltip('Searching word:', 'A descriptive key word for the images that you are looking for')
-app.setLabelTooltip('Number of photos', 'Select the amount of photos that you want to download')
+app.setLabelTooltip('Number of photos: ', 'Select the amount of photos that you want to download')
+
 
 ################ read if exists previous defined variables
 
