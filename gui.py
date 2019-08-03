@@ -18,7 +18,7 @@ import os
 
 def set_():
 	# function that executes the searching, gets variables from inputs
-	execute_search(app.getEntry('User key:'), app.getEntry('Searching word:'), constant.search_pages)
+	execute_search(app.getEntry('User key:'), app.getEntry('Searching word:'), constant.search_pages, app.getOptionBox('img_format'))
 	max_photos = len(search_urls)
 	app.setScaleRange("Number of photos: ", minimum_photos, max_photos, curr=max_photos)
 	write_cached_data()
@@ -88,8 +88,6 @@ app.addLabelScale("Number of photos: ", 8, 0,colspan=3)
 app.addButton('Set', set_, 9, 0, colspan=1)
 app.addButton('Download',download, 9, 1, colspan=1)
 app.addButton('Exit',quit_app, 9, 2, colspan=1)
-
-
 
 
 ############### Config ################################

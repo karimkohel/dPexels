@@ -13,14 +13,15 @@ search_urls = list()
 ############# main ###########################
 
 # function that retrieves list of all urls from api from a giving string
-def execute_search(key, string, pages):
+def execute_search(key, string, pages, format):
 
     pexels_instance = PyPexels(api_key=key)
     search_results = pexels_instance.search(query=string, per_page=pages)
 
     while True:
         for image in search_results.entries:
-            search_urls.append(image.src.get('large'))
+            search_urls.append(image.src.get(format))
+            print(image.src.get(format))
         if not search_results.has_next:
             break
         search_results = search_results.get_next_page()
