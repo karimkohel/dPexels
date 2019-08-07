@@ -3,7 +3,6 @@ The objetive of this app is to create an intuitive GUI for downloading a lot of 
 
 TODO: 
 
-  Add local storage for api key
+>>>>>>> upstream/master
   Make it a bit prettier :)
-  Fix formatting for path
-  Add choice for amount of photos that will be downloaded
+
